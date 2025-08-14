@@ -1,0 +1,62 @@
+import { Switch, Route } from "wouter";
+import { queryClient } from "./lib/queryClient";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "@/components/ui/toaster";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { Suspense, lazy } from 'react';
+import { I18n } from '@/lib/i18n';
+
+// Initialize i18n singleton
+I18n.getInstance();
+
+// Lazy load pages for better performance
+const Home = lazy(() => import("@/pages/home"));
+const Hospitals = lazy(() => import("@/pages/hospitals"));
+const HospitalDetails = lazy(() => import("@/pages/hospital-details"));
+const HealthUnits = lazy(() => import("@/pages/health-units"));
+const HealthUnitDetails = lazy(() => import("@/pages/health-unit-details"));
+const DialysisCenters = lazy(() => import("@/pages/dialysis-centers"));
+const DialysisCenterDetails = lazy(() => import("@/pages/dialysis-center-details"));
+const EmergencyServices = lazy(() => import("@/pages/emergency-services"));
+const NotFound = lazy(() => import("@/pages/not-found"));
+
+// Loading component
+const Loading = () => (
+  <div className="min-h-screen bg-gray-50 font-cairo flex items-center justify-center">
+    <div className="text-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-rose-600 mx-auto mb-4"></div>
+      <p className="text-gray-600">جاري التحميل...</p>
+    </div>
+  </div>
+);
+
+function Router() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/hospitals" component={Hospitals} />
+        <Route path="/hospitals/:id" component={HospitalDetails} />
+        <Route path="/health-units" component={HealthUnits} />
+        <Route path="/health-units/:id" component={HealthUnitDetails} />
+        <Route path="/dialysis-centers" component={DialysisCenters} />
+        <Route path="/dialysis-centers/:id" component={DialysisCenterDetails} />
+        <Route path="/emergency-services" component={EmergencyServices} />
+        <Route component={NotFound} />
+      </Switch>
+    </Suspense>
+  );
+}
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Router />
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+}
+
+export default App;

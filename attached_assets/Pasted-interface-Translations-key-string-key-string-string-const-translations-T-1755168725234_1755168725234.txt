@@ -1,0 +1,208 @@
+interface Translations {
+  [key: string]: {
+    [key: string]: string;
+  };
+}
+
+const translations: Translations = {
+  ar: {
+    // Header
+    "site.title": "دليل المستشفيات",
+    "site.subtitle": "محافظة البحيرة",
+    "nav.home": "الرئيسية",
+    "nav.hospitals": "المستشفيات",
+    "nav.health_units": "الوحدات الصحية",
+    "nav.dialysis": "مراكز غسيل الكلي",
+    "nav.emergency": "الطوارئ",
+    "nav.hotlines": "الخطوط الساخنة",
+    "nav.highway": "خدمات الطرق السريعة",
+    "nav.contact": "اتصل بنا",
+    
+    // Home page
+    "hero.title": "دليل المؤسسات الصحية",
+    "hero.subtitle": "محافظة البحيرة",
+    "hero.description": "دليلك الشامل للوصول إلى أفضل الخدمات الصحية في محافظة البحيرة. اعثر على المستشفيات، الوحدات الصحية، مراكز غسيل الكلى، وخدمات الطوارئ بسهولة ويسر.",
+    
+    // Emergency section
+    "emergency.title": "أرقام الطوارئ",
+    "emergency.description": "في حالات الطوارئ، اتصل فوراً على الأرقام التالية",
+    "emergency.ambulance": "الإسعاف",
+    "emergency.fire": "الدفاع المدني",
+    "emergency.police": "شرطة النجدة",
+    "emergency.all": "عرض جميع خدمات الطوارئ",
+    
+    // Services
+    "services.hospitals": "المستشفيات",
+    "services.hospitals.desc": "اعثر على المستشفيات المتخصصة وتفاصيل الخدمات الطبية المتاحة",
+    "services.hospitals.link": "تصفح المستشفيات",
+    "services.health_units": "الوحدات الصحية",
+    "services.health_units.desc": "الوحدات الصحية المحلية للرعاية الأولية والخدمات الوقائية",
+    "services.health_units.link": "تصفح الوحدات الصحية",
+    "services.dialysis": "مراكز غسيل الكلي",
+    "services.dialysis.desc": "مراكز متخصصة لعلاج الفشل الكلوي وخدمات غسيل الكلي",
+    "services.dialysis.link": "تصفح مراكز غسيل الكلي",
+    "services.emergency": "خدمات الطوارئ",
+    "services.emergency.desc": "خدمات الإسعاف والطوارئ المتاحة على مدار الساعة",
+    "services.emergency.link": "تصفح خدمات الطوارئ",
+    
+    // Footer
+    "footer.contact": "معلومات التواصل",
+    "footer.hotline": "الخط الساخن: 123",
+    "footer.location": "محافظة البحيرة، مصر",
+    "footer.quick_links": "روابط سريعة",
+    "footer.about": "عن الدليل",
+    "footer.about.desc": "دليل شامل للمؤسسات الصحية في محافظة البحيرة، يهدف إلى تسهيل الوصول للخدمات الطبية وتوفير المعلومات الضرورية للمرضى وذويهم.",
+    "footer.copyright": "© 2024 دليل المستشفيات - محافظة البحيرة. جميع الحقوق محفوظة.",
+    
+    // Common
+    "common.loading": "جاري التحميل...",
+    "common.error": "حدث خطأ",
+    "common.retry": "حاول مرة أخرى",
+    "common.back": "العودة",
+    "common.phone": "الهاتف",
+    "common.address": "العنوان",
+    "common.working_hours": "ساعات العمل",
+    "common.services": "الخدمات",
+    "common.details": "التفاصيل"
+  },
+  
+  en: {
+    // Header
+    "site.title": "Hospitals Directory",
+    "site.subtitle": "Beheira Governorate",
+    "nav.home": "Home",
+    "nav.hospitals": "Hospitals",
+    "nav.health_units": "Health Units",
+    "nav.dialysis": "Dialysis Centers",
+    "nav.emergency": "Emergency",
+    "nav.hotlines": "Hotlines",
+    "nav.highway": "Highway Services",
+    "nav.contact": "Contact Us",
+    
+    // Home page
+    "hero.title": "Healthcare Institutions Directory",
+    "hero.subtitle": "Beheira Governorate",
+    "hero.description": "Your comprehensive guide to accessing the best healthcare services in Beheira Governorate. Find hospitals, health units, dialysis centers, and emergency services with ease.",
+    
+    // Emergency section
+    "emergency.title": "Emergency Numbers",
+    "emergency.description": "In case of emergency, call immediately on the following numbers",
+    "emergency.ambulance": "Ambulance",
+    "emergency.fire": "Civil Defense",
+    "emergency.police": "Police Emergency",
+    "emergency.all": "View All Emergency Services",
+    
+    // Services
+    "services.hospitals": "Hospitals",
+    "services.hospitals.desc": "Find specialized hospitals and details of available medical services",
+    "services.hospitals.link": "Browse Hospitals",
+    "services.health_units": "Health Units",
+    "services.health_units.desc": "Local health units for primary care and preventive services",
+    "services.health_units.link": "Browse Health Units",
+    "services.dialysis": "Dialysis Centers",
+    "services.dialysis.desc": "Specialized centers for kidney failure treatment and dialysis services",
+    "services.dialysis.link": "Browse Dialysis Centers",
+    "services.emergency": "Emergency Services",
+    "services.emergency.desc": "Ambulance and emergency services available 24/7",
+    "services.emergency.link": "Browse Emergency Services",
+    
+    // Footer
+    "footer.contact": "Contact Information",
+    "footer.hotline": "Hotline: 123",
+    "footer.location": "Beheira Governorate, Egypt",
+    "footer.quick_links": "Quick Links",
+    "footer.about": "About the Directory",
+    "footer.about.desc": "A comprehensive directory of healthcare institutions in Beheira Governorate, aimed at facilitating access to medical services and providing necessary information for patients and their families.",
+    "footer.copyright": "© 2024 Hospitals Directory - Beheira Governorate. All rights reserved.",
+    
+    // Common
+    "common.loading": "Loading...",
+    "common.error": "An error occurred",
+    "common.retry": "Try again",
+    "common.back": "Back",
+    "common.phone": "Phone",
+    "common.address": "Address",
+    "common.working_hours": "Working Hours",
+    "common.services": "Services",
+    "common.details": "Details"
+  }
+};
+
+export type Language = 'ar' | 'en';
+
+export class I18n {
+  private static instance: I18n;
+  private currentLanguage: Language = 'ar';
+  private listeners: ((lang: Language) => void)[] = [];
+
+  private constructor() {
+    // Load from localStorage if available
+    const savedLang = localStorage.getItem('language') as Language;
+    if (savedLang && (savedLang === 'ar' || savedLang === 'en')) {
+      this.currentLanguage = savedLang;
+    }
+    
+    // Update document direction
+    this.updateDocumentDirection();
+  }
+
+  static getInstance(): I18n {
+    if (!I18n.instance) {
+      I18n.instance = new I18n();
+    }
+    return I18n.instance;
+  }
+
+  getCurrentLanguage(): Language {
+    return this.currentLanguage;
+  }
+
+  setLanguage(lang: Language) {
+    this.currentLanguage = lang;
+    localStorage.setItem('language', lang);
+    this.updateDocumentDirection();
+    this.notifyListeners();
+  }
+
+  private updateDocumentDirection() {
+    document.documentElement.dir = this.currentLanguage === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = this.currentLanguage;
+  }
+
+  private notifyListeners() {
+    this.listeners.forEach(listener => listener(this.currentLanguage));
+  }
+
+  addListener(listener: (lang: Language) => void) {
+    this.listeners.push(listener);
+    return () => {
+      this.listeners = this.listeners.filter(l => l !== listener);
+    };
+  }
+
+  t(key: string): string {
+    return translations[this.currentLanguage]?.[key] || key;
+  }
+
+  toggleLanguage() {
+    this.setLanguage(this.currentLanguage === 'ar' ? 'en' : 'ar');
+  }
+}
+
+// Hook for React components
+import { useState, useEffect } from 'react';
+
+export function useI18n() {
+  const [language, setLanguage] = useState<Language>(() => I18n.getInstance().getCurrentLanguage());
+  
+  useEffect(() => {
+    const i18n = I18n.getInstance();
+    const unsubscribe = i18n.addListener(setLanguage);
+    return unsubscribe;
+  }, []);
+
+  const t = (key: string) => I18n.getInstance().t(key);
+  const toggleLanguage = () => I18n.getInstance().toggleLanguage();
+
+  return { language, t, toggleLanguage };
+}
