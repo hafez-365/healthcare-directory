@@ -1,0 +1,258 @@
+import { useQuery } from '@tanstack/react-query';
+import { useRoute, Link } from 'wouter';
+import { type Hospital } from '@shared/schema';
+import { Layout } from '@/components/ui/layout';
+import { MapPin, Phone, Clock, User, CheckCircle, ArrowRight } from 'lucide-react';
+
+export default function HospitalDetails() {
+  const [match, params] = useRoute('/hospitals/:id');
+  const hospitalId = params?.id;
+
+  const { data: hospital, isLoading, error } = useQuery<Hospital>({
+    queryKey: ['/api/hospitals', hospitalId],
+    enabled: !!hospitalId,
+  });
+
+  if (isLoading) {
+    return (
+      <Layout>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-rose-900"></div>
+        </div>
+      </Layout>
+    );
+  }
+
+  if (error || !hospital) {
+    return (
+      <Layout>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">لم يتم العثور على المستشفى</h2>
+            <Link 
+              to="/hospitals" 
+              className="text-rose-900 hover:text-rose-700 underline"
+              data-testid="link-back-to-hospitals"
+            >
+              العودة إلى قائمة المستشفيات
+            </Link>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
+  return (
+    <Layout>
+      {/* Back Navigation */}
+      <div className="mb-6">
+        <Link 
+          to="/hospitals"
+          className="inline-flex items-center text-rose-900 hover:text-rose-700 transition-colors"
+          data-testid="link-back-navigation"
+        >
+          <ArrowRight className="h-4 w-4 ml-2" />
+          العودة إلى قائمة المستشفيات
+        </Link>
+      </div>
+
+      {/* Hero Section with Hospital Image */}
+      <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+        <div className="relative h-64 md:h-80 bg-gradient-to-br from-rose-50 to-rose-100">
+          <div className="w-full h-full bg-gradient-to-r from-rose-100 to-rose-200 flex items-center justify-center">
+            <span className="text-rose-800 font-bold text-lg">صورة {hospital.name}</span>
+          </div>
+          
+          {/* Overlay with hospital name */}
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+            <h1 
+              className="text-2xl md:text-3xl font-bold text-white mb-2"
+              data-testid="text-hospital-name"
+            >
+              {hospital.name}
+            </h1>
+            <div className="flex items-center text-white/90">
+              <MapPin className="h-5 w-5 ml-2" />
+              <span className="text-sm" data-testid="text-hospital-address">
+                {hospital.address}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Hospital Basic Information */}
+      <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Left Column: Contact and Basic Info */}
+          <div className="space-y-4">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">معلومات التواصل</h2>
+            
+            {/* Phone */}
+            <div className="flex items-center p-4 bg-gray-50 rounded-lg">
+              <div className="bg-blue-100 p-3 rounded-full ml-4">
+                <Phone className="h-6 w-6 text-blue-600" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-600 font-medium">هاتف المستشفى</p>
+                <a 
+                  href={`tel:${hospital.phone}`}
+                  className="text-gray-900 font-semibold hover:text-blue-600 transition-colors"
+                  data-testid="link-hospital-phone"
+                >
+                  {hospital.phone}
+                </a>
+              </div>
+            </div>
+            
+            {/* Beds */}
+            <div className="flex items-center p-4 bg-gray-50 rounded-lg">
+              <div className="bg-amber-100 p-3 rounded-full ml-4">
+                <Clock className="h-6 w-6 text-amber-600" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-600 font-medium">عدد الأسرة</p>
+                <p className="text-gray-900 font-semibold" data-testid="text-hospital-beds">
+                  {hospital.beds}
+                </p>
+              </div>
+            </div>
+            
+            {/* Working Hours */}
+            <div className="flex items-center p-4 bg-gray-50 rounded-lg">
+              <div className="bg-green-100 p-3 rounded-full ml-4">
+                <Clock className="h-6 w-6 text-green-600" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-600 font-medium">ساعات العمل</p>
+                <p className="text-gray-900 font-semibold" data-testid="text-working-hours">
+                  {hospital.workingHours}
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Right Column: Description and Actions */}
+          <div>
+            <h2 className="text-xl font-bold text-gray-900 mb-4">نبذة عن المستشفى</h2>
+            <p 
+              className="text-gray-700 leading-relaxed mb-6"
+              data-testid="text-hospital-description"
+            >
+              {hospital.description}
+            </p>
+            
+            {/* Action Buttons */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <a 
+                href={`tel:${hospital.phone}`}
+                className="bg-green-600 hover:bg-green-700 text-white text-center px-6 py-3 rounded-lg flex items-center justify-center gap-2 transition-colors"
+                data-testid="button-call-now"
+              >
+                <Phone className="h-5 w-5" />
+                اتصل الآن
+              </a>
+              <button 
+                className="bg-rose-900 hover:bg-rose-800 text-white text-center px-6 py-3 rounded-lg flex items-center justify-center gap-2 transition-colors"
+                data-testid="button-get-directions"
+              >
+                <MapPin className="h-5 w-5" />
+                احصل على الاتجاهات
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Services Section */}
+      <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">الخدمات المقدمة</h2>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {hospital.services.map((service, index) => (
+            <div 
+              key={index}
+              className="flex items-center p-4 bg-rose-50 rounded-lg border border-rose-100"
+              data-testid={`service-item-${index}`}
+            >
+              <div className="bg-rose-200 p-2 rounded-full ml-3">
+                <CheckCircle className="h-5 w-5 text-rose-800" />
+              </div>
+              <span className="text-gray-900 font-medium">{service}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Doctors Section */}
+      <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">الأطباء المتخصصون</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {hospital.doctors.map((doctor, index) => (
+            <div 
+              key={index}
+              className="flex items-center p-6 bg-gray-50 rounded-lg border border-gray-200 hover:shadow-md transition-shadow"
+              data-testid={`doctor-card-${index}`}
+            >
+              {/* Doctor Avatar */}
+              <div className="bg-rose-100 p-4 rounded-full ml-4 flex-shrink-0">
+                <User className="h-8 w-8 text-rose-800" />
+              </div>
+              
+              <div className="flex-grow">
+                <h3 className="font-bold text-gray-900 text-lg mb-1" data-testid={`text-doctor-name-${index}`}>
+                  {doctor.name}
+                </h3>
+                <p className="text-rose-700 font-medium text-sm mb-2" data-testid={`text-doctor-specialty-${index}`}>
+                  {doctor.specialty}
+                </p>
+                <div className="flex items-center text-gray-600 text-sm">
+                  <Clock className="h-4 w-4 ml-1" />
+                  <span>متاح للاستشارات</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Map Section */}
+      <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">الموقع على الخريطة</h2>
+        
+        {/* Map Placeholder */}
+        <div className="h-64 md:h-80 rounded-lg overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 relative">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center">
+              <div className="bg-rose-900 p-4 rounded-full mx-auto mb-4">
+                <MapPin className="h-8 w-8 text-white" />
+              </div>
+              <p className="text-gray-700 font-medium mb-4">موقع {hospital.name}</p>
+              <button 
+                className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition-colors"
+                data-testid="button-open-map"
+              >
+                افتح الخريطة التفاعلية
+              </button>
+            </div>
+          </div>
+          
+          {/* Map Controls */}
+          <div className="absolute top-4 right-4 space-y-2">
+            <button className="bg-white shadow-md p-2 rounded-md hover:shadow-lg transition-shadow" data-testid="button-zoom-in">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+            </button>
+            <button className="bg-white shadow-md p-2 rounded-md hover:shadow-lg transition-shadow" data-testid="button-zoom-out">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 12H6" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </Layout>
+  );
+}

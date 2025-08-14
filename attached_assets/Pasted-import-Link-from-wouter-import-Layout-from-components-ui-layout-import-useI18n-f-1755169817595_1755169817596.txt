@@ -1,0 +1,231 @@
+import { Link } from 'wouter';
+import { Layout } from '@/components/ui/layout';
+import { useI18n } from '@/lib/i18n';
+import { 
+  Building2, 
+  Heart, 
+  Activity, 
+  AlertTriangle, 
+  Phone, 
+  MapPin,
+  Clock,
+  Users,
+  Shield,
+  ChevronRight
+} from 'lucide-react';
+
+export default function Home() {
+  const { t } = useI18n();
+  
+  return (
+    <Layout>
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-rose-900 via-rose-800 to-rose-700 text-white rounded-2xl p-8 md:p-12 mb-12">
+        <div className="text-center">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4" data-testid="text-hero-title">
+            {t('hero.title')}
+          </h1>
+          <h2 className="text-xl md:text-2xl text-rose-100 mb-6" data-testid="text-hero-subtitle">
+            {t('hero.subtitle')}
+          </h2>
+          <p className="text-rose-100 text-lg leading-relaxed max-w-3xl mx-auto">
+            {t('hero.description')}
+          </p>
+        </div>
+      </section>
+
+      {/* Quick Emergency Section */}
+      <section className="bg-red-50 border border-red-200 rounded-xl p-6 mb-12">
+        <div className="text-center mb-6">
+          <AlertTriangle className="h-12 w-12 text-red-600 mx-auto mb-3" />
+          <h3 className="text-2xl font-bold text-red-800 mb-2">{t('emergency.title')}</h3>
+          <p className="text-red-700">{t('emergency.description')}</p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+          <a 
+            href="tel:123" 
+            className="bg-red-600 hover:bg-red-700 text-white p-4 rounded-lg text-center transition-colors"
+            data-testid="button-emergency-ambulance"
+          >
+            <Phone className="h-6 w-6 mx-auto mb-2" />
+            <p className="font-bold">{t('emergency.ambulance')}</p>
+            <p className="text-red-100">123</p>
+          </a>
+          <a 
+            href="tel:180" 
+            className="bg-orange-600 hover:bg-orange-700 text-white p-4 rounded-lg text-center transition-colors"
+            data-testid="button-emergency-fire"
+          >
+            <Phone className="h-6 w-6 mx-auto mb-2" />
+            <p className="font-bold">{t('emergency.fire')}</p>
+            <p className="text-orange-100">180</p>
+          </a>
+          <a 
+            href="tel:122" 
+            className="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-lg text-center transition-colors"
+            data-testid="button-emergency-police"
+          >
+            <Phone className="h-6 w-6 mx-auto mb-2" />
+            <p className="font-bold">{t('emergency.police')}</p>
+            <p className="text-blue-100">122</p>
+          </a>
+        </div>
+
+        <div className="text-center">
+          <Link 
+            to="/emergency-services"
+            className="inline-flex items-center bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-colors"
+            data-testid="link-all-emergency-services"
+          >
+{t('emergency.all')}
+            <ChevronRight className="h-4 w-4 mr-2" />
+          </Link>
+        </div>
+      </section>
+
+      {/* Main Services Grid */}
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        {/* Hospitals */}
+        <Link to="/hospitals">
+          <div className="bg-white rounded-xl shadow-md hover:shadow-lg p-6 text-center transition-shadow cursor-pointer group" data-testid="card-hospitals">
+            <div className="bg-rose-100 p-4 rounded-full w-20 h-20 mx-auto mb-4 group-hover:bg-rose-200 transition-colors">
+              <Building2 className="h-12 w-12 text-rose-600 mx-auto" />
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">{t('services.hospitals')}</h3>
+            <p className="text-gray-600 text-sm mb-4">
+              {t('services.hospitals.desc')}
+            </p>
+            <div className="flex items-center justify-center text-rose-600 group-hover:text-rose-700">
+              <span className="text-sm font-medium">{t('services.hospitals.link')}</span>
+              <ChevronRight className="h-4 w-4 mr-1" />
+            </div>
+          </div>
+        </Link>
+
+        {/* Health Units */}
+        <Link to="/health-units">
+          <div className="bg-white rounded-xl shadow-md hover:shadow-lg p-6 text-center transition-shadow cursor-pointer group" data-testid="card-health-units">
+            <div className="bg-green-100 p-4 rounded-full w-20 h-20 mx-auto mb-4 group-hover:bg-green-200 transition-colors">
+              <Heart className="h-12 w-12 text-green-600 mx-auto" />
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">{t('services.health_units')}</h3>
+            <p className="text-gray-600 text-sm mb-4">
+              {t('services.health_units.desc')}
+            </p>
+            <div className="flex items-center justify-center text-green-600 group-hover:text-green-700">
+              <span className="text-sm font-medium">{t('services.health_units.link')}</span>
+              <ChevronRight className="h-4 w-4 mr-1" />
+            </div>
+          </div>
+        </Link>
+
+        {/* Dialysis Centers */}
+        <Link to="/dialysis-centers">
+          <div className="bg-white rounded-xl shadow-md hover:shadow-lg p-6 text-center transition-shadow cursor-pointer group" data-testid="card-dialysis-centers">
+            <div className="bg-blue-100 p-4 rounded-full w-20 h-20 mx-auto mb-4 group-hover:bg-blue-200 transition-colors">
+              <Activity className="h-12 w-12 text-blue-600 mx-auto" />
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">{t('services.dialysis')}</h3>
+            <p className="text-gray-600 text-sm mb-4">
+              {t('services.dialysis.desc')}
+            </p>
+            <div className="flex items-center justify-center text-blue-600 group-hover:text-blue-700">
+              <span className="text-sm font-medium">{t('services.dialysis.link')}</span>
+              <ChevronRight className="h-4 w-4 mr-1" />
+            </div>
+          </div>
+        </Link>
+
+        {/* Emergency Services */}
+        <Link to="/emergency-services">
+          <div className="bg-white rounded-xl shadow-md hover:shadow-lg p-6 text-center transition-shadow cursor-pointer group" data-testid="card-emergency-services">
+            <div className="bg-red-100 p-4 rounded-full w-20 h-20 mx-auto mb-4 group-hover:bg-red-200 transition-colors">
+              <AlertTriangle className="h-12 w-12 text-red-600 mx-auto" />
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">{t('services.emergency')}</h3>
+            <p className="text-gray-600 text-sm mb-4">
+              {t('services.emergency.desc')}
+            </p>
+            <div className="flex items-center justify-center text-red-600 group-hover:text-red-700">
+              <span className="text-sm font-medium">{t('services.emergency.link')}</span>
+              <ChevronRight className="h-4 w-4 mr-1" />
+            </div>
+          </div>
+        </Link>
+      </section>
+
+      {/* Statistics Section */}
+      <section className="bg-white rounded-xl shadow-md p-8 mb-12">
+        <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">إحصائيات الخدمات الصحية</h2>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="text-center">
+            <div className="bg-rose-100 p-4 rounded-full w-16 h-16 mx-auto mb-3">
+              <Building2 className="h-8 w-8 text-rose-600 mx-auto" />
+            </div>
+            <p className="text-3xl font-bold text-gray-900 mb-1" data-testid="stat-hospitals">6</p>
+            <p className="text-gray-600 text-sm">مستشفى</p>
+          </div>
+          
+          <div className="text-center">
+            <div className="bg-green-100 p-4 rounded-full w-16 h-16 mx-auto mb-3">
+              <Heart className="h-8 w-8 text-green-600 mx-auto" />
+            </div>
+            <p className="text-3xl font-bold text-gray-900 mb-1" data-testid="stat-health-units">3</p>
+            <p className="text-gray-600 text-sm">وحدة صحية</p>
+          </div>
+          
+          <div className="text-center">
+            <div className="bg-blue-100 p-4 rounded-full w-16 h-16 mx-auto mb-3">
+              <Activity className="h-8 w-8 text-blue-600 mx-auto" />
+            </div>
+            <p className="text-3xl font-bold text-gray-900 mb-1" data-testid="stat-dialysis-centers">2</p>
+            <p className="text-gray-600 text-sm">مركز غسيل كلى</p>
+          </div>
+          
+          <div className="text-center">
+            <div className="bg-red-100 p-4 rounded-full w-16 h-16 mx-auto mb-3">
+              <Shield className="h-8 w-8 text-red-600 mx-auto" />
+            </div>
+            <p className="text-3xl font-bold text-gray-900 mb-1" data-testid="stat-emergency-services">5</p>
+            <p className="text-gray-600 text-sm">خدمة طوارئ</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div className="text-center">
+          <div className="bg-purple-100 p-4 rounded-full w-16 h-16 mx-auto mb-4">
+            <MapPin className="h-8 w-8 text-purple-600 mx-auto" />
+          </div>
+          <h3 className="text-lg font-bold text-gray-900 mb-2">تحديد المواقع</h3>
+          <p className="text-gray-600 text-sm">
+            اعثر على أقرب المؤسسات الصحية إليك بسهولة
+          </p>
+        </div>
+        
+        <div className="text-center">
+          <div className="bg-indigo-100 p-4 rounded-full w-16 h-16 mx-auto mb-4">
+            <Clock className="h-8 w-8 text-indigo-600 mx-auto" />
+          </div>
+          <h3 className="text-lg font-bold text-gray-900 mb-2">متاح 24/7</h3>
+          <p className="text-gray-600 text-sm">
+            معلومات محدثة ومتاحة على مدار الساعة
+          </p>
+        </div>
+        
+        <div className="text-center">
+          <div className="bg-teal-100 p-4 rounded-full w-16 h-16 mx-auto mb-4">
+            <Users className="h-8 w-8 text-teal-600 mx-auto" />
+          </div>
+          <h3 className="text-lg font-bold text-gray-900 mb-2">خدمة المجتمع</h3>
+          <p className="text-gray-600 text-sm">
+            نسعى لخدمة جميع أفراد المجتمع في محافظة مطروح
+          </p>
+        </div>
+      </section>
+    </Layout>
+  );
+}

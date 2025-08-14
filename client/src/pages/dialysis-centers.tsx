@@ -1,17 +1,15 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'wouter';
-import { type Hospital } from '@shared/schema';
+import { type DialysisCenter } from '@shared/schema';
 import { Layout } from '@/components/ui/layout';
-import { useI18n } from '@/lib/i18n';
-import { MapPin, Phone, Clock, ChevronRight, Bed } from 'lucide-react';
+import { MapPin, Phone, Clock, ChevronRight, Activity } from 'lucide-react';
 
-export default function Hospitals() {
-  const { t, language } = useI18n();
+export default function DialysisCenters() {
   const [selectedFilter, setSelectedFilter] = useState<string>('المسافة');
 
-  const { data: hospitals, isLoading, error } = useQuery<Hospital[]>({
-    queryKey: ['/api/hospitals'],
+  const { data: dialysisCenters, isLoading, error } = useQuery<DialysisCenter[]>({
+    queryKey: ['/api/dialysis-centers'],
   });
 
   if (isLoading) {
@@ -39,18 +37,16 @@ export default function Hospitals() {
 
   return (
     <Layout>
-      <h2 className="text-3xl font-bold mb-8 text-gray-900">{t("services.hospitals")}</h2>
-      
       {/* Search and Filter Section */}
       <section className="bg-white rounded-xl shadow-md p-6 mb-8">
         <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
           {/* Results Counter */}
           <div className="flex items-center text-sm">
             <span className="text-gray-700">إجمالي</span>
-            <span className="text-rose-600 font-bold mx-2 text-lg" data-testid="hospitals-count">
-              {hospitals?.length || 0}
+            <span className="text-rose-600 font-bold mx-2 text-lg" data-testid="dialysis-centers-count">
+              {dialysisCenters?.length || 0}
             </span>
-            <span className="text-gray-700">مستشفى</span>
+            <span className="text-gray-700">مركز غسيل كلى</span>
           </div>
           
           {/* Search and Sort Controls */}
@@ -64,7 +60,7 @@ export default function Hospitals() {
               >
                 <option value="المسافة">ترتيب حسب المسافة</option>
                 <option value="الاسم">أ إلى ي</option>
-                <option value="الأسرة">عدد الأسرة</option>
+                <option value="السعة">السعة</option>
               </select>
               <button 
                 className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-l-md text-sm transition-colors whitespace-nowrap"
@@ -85,25 +81,30 @@ export default function Hospitals() {
         </div>
       </section>
 
-      {/* Hospitals Grid */}
+      {/* Dialysis Centers Grid */}
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        {hospitals?.map((hospital) => (
+        {dialysisCenters?.map((center) => (
           <div 
-            key={hospital.id} 
+            key={center.id} 
             className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group"
-            data-testid={`card-hospital-${hospital.id}`}
+            data-testid={`card-dialysis-center-${center.id}`}
           >
             <div className="p-6">
-              {/* Hospital Name */}
-              <h3 className="text-xl font-bold mb-4 text-gray-900 group-hover:text-rose-900 transition-colors">
-                {language === 'ar' ? hospital.name : hospital.nameEn}
-              </h3>
+              {/* Center Name */}
+              <div className="flex items-center mb-4">
+                <div className="bg-blue-100 p-2 rounded-full ml-3">
+                  <Activity className="h-5 w-5 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 group-hover:text-rose-900 transition-colors">
+                  {center.name}
+                </h3>
+              </div>
               
               {/* Address */}
               <div className="flex items-start mb-3">
                 <MapPin className="h-5 w-5 text-rose-500 mt-0.5 ml-3 flex-shrink-0" />
                 <span className="text-gray-700 text-sm leading-relaxed">
-                  {language === 'ar' ? hospital.address : hospital.addressEn}
+                  {center.address}
                 </span>
               </div>
               
@@ -111,53 +112,39 @@ export default function Hospitals() {
               <div className="flex items-center mb-3">
                 <Phone className="h-5 w-5 text-blue-600 ml-3 flex-shrink-0" />
                 <a 
-                  href={`tel:${hospital.phone}`} 
+                  href={`tel:${center.phone}`} 
                   className="text-gray-700 text-sm hover:text-blue-600 transition-colors"
-                  data-testid={`link-phone-${hospital.id}`}
+                  data-testid={`link-phone-${center.id}`}
                 >
-                  {hospital.phone}
+                  {center.phone}
                 </a>
               </div>
               
-              {/* Beds */}
-              <div className="flex items-center mb-4">
-                <Bed className="h-5 w-5 text-amber-600 ml-3 flex-shrink-0" />
-                <span className="text-gray-700 text-sm">{hospital.beds} {t("common.beds")}</span>
+              {/* Working Hours */}
+              <div className="flex items-center mb-3">
+                <Clock className="h-5 w-5 text-green-600 ml-3 flex-shrink-0" />
+                <span className="text-gray-700 text-sm">{center.workingHours}</span>
               </div>
-              
-              {/* Services */}
-              <div className="mb-6">
-                <h4 className="font-semibold text-sm text-gray-900 mb-2">الخدمات المقدمة:</h4>
-                <div className="flex flex-wrap gap-2">
-                  {(language === 'ar' ? hospital.services : hospital.servicesEn).slice(0, 3).map((service, index) => (
-                    <span 
-                      key={index}
-                      className="bg-rose-100 text-rose-800 px-2 py-1 rounded-full text-xs font-medium"
-                    >
-                      {service}
-                    </span>
-                  ))}
-                  {hospital.services.length > 3 && (
-                    <span className="text-xs text-gray-500">
-                      +{hospital.services.length - 3} خدمات أخرى
-                    </span>
-                  )}
-                </div>
+
+              {/* Machines */}
+              <div className="flex items-center mb-6">
+                <Activity className="h-5 w-5 text-purple-600 ml-3 flex-shrink-0" />
+                <span className="text-gray-700 text-sm font-medium">عدد الأجهزة: {center.machines}</span>
               </div>
               
               {/* Action Buttons */}
               <div className="flex gap-2">
                 <Link 
-                  to={`/hospitals/${hospital.id}`}
+                  to={`/dialysis-centers/${center.id}`}
                   className="flex-1 bg-rose-900 hover:bg-rose-800 text-white text-sm px-3 py-2 rounded-md transition-colors flex items-center justify-center"
-                  data-testid={`button-details-${hospital.id}`}
+                  data-testid={`button-details-${center.id}`}
                 >
                   عرض التفاصيل
                   <ChevronRight className="h-4 w-4 mr-1" />
                 </Link>
                 <button 
                   className="bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 rounded-md transition-colors flex items-center justify-center"
-                  data-testid={`button-directions-${hospital.id}`}
+                  data-testid={`button-directions-${center.id}`}
                 >
                   <MapPin className="h-4 w-4" />
                 </button>

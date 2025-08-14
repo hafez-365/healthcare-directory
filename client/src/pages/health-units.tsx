@@ -1,11 +1,12 @@
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from 'wouter';
 import { type HealthUnit } from '@shared/schema';
 import { Layout } from '@/components/ui/layout';
-import { useI18n } from '@/lib/i18n';
-import { MapPin, Phone, Clock } from 'lucide-react';
+import { MapPin, Phone, Clock, ChevronRight, Heart } from 'lucide-react';
 
 export default function HealthUnits() {
-  const { t, language } = useI18n();
+  const [selectedFilter, setSelectedFilter] = useState<string>('المسافة');
 
   const { data: healthUnits, isLoading, error } = useQuery<HealthUnit[]>({
     queryKey: ['/api/health-units'],
@@ -36,41 +37,136 @@ export default function HealthUnits() {
 
   return (
     <Layout>
-      <h2 className="text-3xl font-bold mb-8 text-gray-900">{t("services.health_units")}</h2>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {healthUnits?.map((unit) => (
-          <div key={unit.id} className="bg-white rounded-xl shadow-md p-6">
-            <h3 className="text-xl font-bold mb-3 text-gray-900">
-              {language === 'ar' ? unit.name : unit.nameEn}
-            </h3>
-            <div className="space-y-3">
-              <div className="flex items-center text-sm text-gray-600">
-                <MapPin className="text-rose-500 ml-2 h-4 w-4" />
-                <span>{language === 'ar' ? unit.address : unit.addressEn}</span>
-              </div>
-              <div className="flex items-center text-sm text-gray-600">
-                <Phone className="text-blue-600 ml-2 h-4 w-4" />
-                <a href={`tel:${unit.phone}`} className="hover:text-blue-600">{unit.phone}</a>
-              </div>
-              <div className="flex items-center text-sm text-gray-600">
-                <Clock className="text-amber-600 ml-2 h-4 w-4" />
-                <span>{language === 'ar' ? unit.workingHours : unit.workingHoursEn}</span>
-              </div>
+      {/* Search and Filter Section */}
+      <section className="bg-white rounded-xl shadow-md p-6 mb-8">
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
+          {/* Results Counter */}
+          <div className="flex items-center text-sm">
+            <span className="text-gray-700">إجمالي</span>
+            <span className="text-rose-600 font-bold mx-2 text-lg" data-testid="health-units-count">
+              {healthUnits?.length || 0}
+            </span>
+            <span className="text-gray-700">وحدة صحية</span>
+          </div>
+          
+          {/* Search and Sort Controls */}
+          <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
+            <div className="flex items-center w-full sm:w-auto">
+              <select 
+                value={selectedFilter}
+                onChange={(e) => setSelectedFilter(e.target.value)}
+                className="border border-gray-300 px-4 py-2 rounded-r-md text-sm bg-white text-gray-900 focus:ring-2 focus:ring-rose-500 focus:border-rose-500 w-full sm:w-auto"
+                data-testid="filter-select"
+              >
+                <option value="المسافة">ترتيب حسب المسافة</option>
+                <option value="الاسم">أ إلى ي</option>
+                <option value="ساعات العمل">ساعات العمل</option>
+              </select>
+              <button 
+                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-l-md text-sm transition-colors whitespace-nowrap"
+                data-testid="button-search-nearby"
+              >
+                البحث عن الأقرب
+              </button>
             </div>
-            <div className="mt-4 pt-4 border-t border-gray-200">
-              {(language === 'ar' ? unit.services : unit.servicesEn).map((service, index) => (
-                <span 
-                  key={index}
-                  className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full mr-2 mb-2 inline-block"
-                >
-                  {service}
+            
+            <button 
+              className="bg-rose-900 hover:bg-rose-800 text-white px-4 py-2 rounded-md text-sm flex items-center gap-2 transition-colors w-full sm:w-auto justify-center"
+              data-testid="button-get-location"
+            >
+              <MapPin className="h-4 w-4" />
+              تحديد موقعك
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Health Units Grid */}
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        {healthUnits?.map((unit) => (
+          <div 
+            key={unit.id} 
+            className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group"
+            data-testid={`card-health-unit-${unit.id}`}
+          >
+            <div className="p-6">
+              {/* Unit Name */}
+              <div className="flex items-center mb-4">
+                <div className="bg-rose-100 p-2 rounded-full ml-3">
+                  <Heart className="h-5 w-5 text-rose-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 group-hover:text-rose-900 transition-colors">
+                  {unit.name}
+                </h3>
+              </div>
+              
+              {/* Address */}
+              <div className="flex items-start mb-3">
+                <MapPin className="h-5 w-5 text-rose-500 mt-0.5 ml-3 flex-shrink-0" />
+                <span className="text-gray-700 text-sm leading-relaxed">
+                  {unit.address}
                 </span>
-              ))}
+              </div>
+              
+              {/* Phone */}
+              <div className="flex items-center mb-3">
+                <Phone className="h-5 w-5 text-blue-600 ml-3 flex-shrink-0" />
+                <a 
+                  href={`tel:${unit.phone}`} 
+                  className="text-gray-700 text-sm hover:text-blue-600 transition-colors"
+                  data-testid={`link-phone-${unit.id}`}
+                >
+                  {unit.phone}
+                </a>
+              </div>
+              
+              {/* Working Hours */}
+              <div className="flex items-center mb-4">
+                <Clock className="h-5 w-5 text-green-600 ml-3 flex-shrink-0" />
+                <span className="text-gray-700 text-sm">{unit.workingHours}</span>
+              </div>
+              
+              {/* Services */}
+              <div className="mb-6">
+                <h4 className="font-semibold text-sm text-gray-900 mb-2">الخدمات المقدمة:</h4>
+                <div className="flex flex-wrap gap-2">
+                  {unit.services.slice(0, 3).map((service, index) => (
+                    <span 
+                      key={index}
+                      className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium"
+                    >
+                      {service}
+                    </span>
+                  ))}
+                  {unit.services.length > 3 && (
+                    <span className="text-xs text-gray-500">
+                      +{unit.services.length - 3} خدمات أخرى
+                    </span>
+                  )}
+                </div>
+              </div>
+              
+              {/* Action Buttons */}
+              <div className="flex gap-2">
+                <Link 
+                  to={`/health-units/${unit.id}`}
+                  className="flex-1 bg-rose-900 hover:bg-rose-800 text-white text-sm px-3 py-2 rounded-md transition-colors flex items-center justify-center"
+                  data-testid={`button-details-${unit.id}`}
+                >
+                  عرض التفاصيل
+                  <ChevronRight className="h-4 w-4 mr-1" />
+                </Link>
+                <button 
+                  className="bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 rounded-md transition-colors flex items-center justify-center"
+                  data-testid={`button-directions-${unit.id}`}
+                >
+                  <MapPin className="h-4 w-4" />
+                </button>
+              </div>
             </div>
           </div>
         ))}
-      </div>
+      </section>
     </Layout>
   );
 }
