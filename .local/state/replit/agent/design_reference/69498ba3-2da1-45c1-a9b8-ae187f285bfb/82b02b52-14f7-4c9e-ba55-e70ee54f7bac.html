@@ -1,0 +1,700 @@
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل المستشفيات - محافظة البحيرة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'cairo': ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        'rose': {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            800: '#9f1239',
+                            900: '#881337',
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="min-h-screen bg-gray-50 font-cairo">
+    <!-- @COMPONENT: Header -->
+    <header class="bg-rose-900 text-white shadow-lg">
+        <!-- Top Header with Logo and Language Toggle -->
+        <div class="border-b border-rose-800">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <!-- Logo/Brand -->
+                <div class="flex items-center space-x-reverse space-x-3">
+                    <div class="h-10 w-10 bg-white rounded-lg flex items-center justify-center">
+                        <i class="fas fa-hospital text-rose-900 text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold" data-bind="site.title">دليل المستشفيات</h1>
+                        <p class="text-xs text-rose-200" data-bind="site.subtitle">محافظة البحيرة</p>
+                    </div>
+                </div>
+                
+                <!-- Language Toggle -->
+                <button 
+                    onclick="toggleLanguage()"
+                    class="bg-white text-rose-900 px-4 py-2 rounded-md text-sm font-medium hover:bg-rose-50 transition-colors"
+                    id="language-toggle"
+                >
+                    EN
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="container mx-auto px-4 py-4">
+            <ul class="flex flex-wrap justify-center gap-6 text-sm">
+                <li><a href="#home" class="text-white hover:text-rose-200 transition-colors border-b-2 border-rose-700 pb-1" data-nav="home">الرئيسية</a></li>
+                <li><a href="#hospitals" class="text-white hover:text-rose-200 transition-colors" data-nav="hospitals">المستشفيات</a></li>
+                <li><a href="#health-units" class="text-white hover:text-rose-200 transition-colors" data-nav="health-units">الوحدات الصحية</a></li>
+                <li><a href="#dialysis" class="text-white hover:text-rose-200 transition-colors" data-nav="dialysis">مراكز غسيل الكلي</a></li>
+                <li><a href="#emergency" class="text-white hover:text-rose-200 transition-colors" data-nav="emergency">الطوارئ</a></li>
+                <li><a href="#hotlines" class="text-white hover:text-rose-200 transition-colors" data-nav="hotlines">الخطوط الساخنة</a></li>
+                <li><a href="#contact" class="text-white hover:text-rose-200 transition-colors" data-nav="contact">اتصل بنا</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- @END_COMPONENT: Header -->
+
+    <!-- @COMPONENT: MainContent -->
+    <main class="container mx-auto px-4 py-6 max-w-7xl">
+        
+        <!-- @COMPONENT: HeroSection -->
+        <section id="home" class="text-center mb-12">
+            <!-- Modern medical facility building with contemporary architecture -->
+            <div class="relative h-96 rounded-2xl overflow-hidden mb-8" style="background-image: url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&h=800'); background-size: cover; background-position: center;">
+                <div class="absolute inset-0 bg-rose-900 bg-opacity-70 flex items-center justify-center">
+                    <div class="text-white text-center max-w-4xl px-6">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-4" data-bind="hero.title">دليل المؤسسات الصحية</h2>
+                        <h3 class="text-2xl md:text-3xl mb-6 text-rose-200" data-bind="hero.subtitle">محافظة البحيرة</h3>
+                        <p class="text-lg md:text-xl leading-relaxed max-w-3xl mx-auto" data-bind="hero.description">
+                            دليلك الشامل للوصول إلى أفضل الخدمات الصحية في محافظة البحيرة. اعثر على المستشفيات، الوحدات الصحية، مراكز غسيل الكلى، وخدمات الطوارئ بسهولة ويسر.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- @END_COMPONENT: HeroSection -->
+
+        <!-- @COMPONENT: EmergencySection -->
+        <section class="bg-red-50 border border-red-200 rounded-xl p-6 mb-12">
+            <div class="text-center mb-6">
+                <h3 class="text-2xl font-bold text-red-800 mb-2" data-bind="emergency.title">أرقام الطوارئ</h3>
+                <p class="text-red-600" data-bind="emergency.description">في حالات الطوارئ، اتصل فوراً على الأرقام التالية</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <a href="tel:123" class="bg-red-600 hover:bg-red-700 text-white p-4 rounded-lg text-center transition-colors group">
+                    <i class="fas fa-ambulance text-2xl mb-2 group-hover:scale-110 transition-transform"></i>
+                    <div class="font-bold" data-bind="emergency.ambulance">الإسعاف</div>
+                    <div class="text-2xl font-mono">123</div>
+                </a>
+                <a href="tel:180" class="bg-red-600 hover:bg-red-700 text-white p-4 rounded-lg text-center transition-colors group">
+                    <i class="fas fa-fire-extinguisher text-2xl mb-2 group-hover:scale-110 transition-transform"></i>
+                    <div class="font-bold" data-bind="emergency.fire">الدفاع المدني</div>
+                    <div class="text-2xl font-mono">180</div>
+                </a>
+                <a href="tel:122" class="bg-red-600 hover:bg-red-700 text-white p-4 rounded-lg text-center transition-colors group">
+                    <i class="fas fa-shield-alt text-2xl mb-2 group-hover:scale-110 transition-transform"></i>
+                    <div class="font-bold" data-bind="emergency.police">شرطة النجدة</div>
+                    <div class="text-2xl font-mono">122</div>
+                </a>
+            </div>
+        </section>
+        <!-- @END_COMPONENT: EmergencySection -->
+
+        <!-- @COMPONENT: ServicesGrid -->
+        <section class="mb-12">
+            <h3 class="text-3xl font-bold text-center mb-8 text-gray-900">الخدمات المتاحة</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Hospitals Service -->
+                <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 group cursor-pointer" onclick="showSection('hospitals')">
+                    <!-- Modern hospital exterior with glass facade -->
+                    <div class="h-48 rounded-t-xl overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400'); background-size: cover; background-position: center;"></div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-rose-900 transition-colors" data-bind="services.hospitals">المستشفيات</h4>
+                        <p class="text-gray-600 text-sm mb-4" data-bind="services.hospitals.desc">اعثر على المستشفيات المتخصصة وتفاصيل الخدمات الطبية المتاحة</p>
+                        <div class="flex items-center text-rose-600 text-sm font-medium">
+                            <span data-bind="services.hospitals.link">تصفح المستشفيات</span>
+                            <i class="fas fa-chevron-right mr-2 group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Health Units Service -->
+                <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 group cursor-pointer" onclick="showSection('health-units')">
+                    <!-- Community health clinic building -->
+                    <div class="h-48 rounded-t-xl overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400'); background-size: cover; background-position: center;"></div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-rose-900 transition-colors" data-bind="services.health_units">الوحدات الصحية</h4>
+                        <p class="text-gray-600 text-sm mb-4" data-bind="services.health_units.desc">الوحدات الصحية المحلية للرعاية الأولية والخدمات الوقائية</p>
+                        <div class="flex items-center text-rose-600 text-sm font-medium">
+                            <span data-bind="services.health_units.link">تصفح الوحدات الصحية</span>
+                            <i class="fas fa-chevron-right mr-2 group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dialysis Centers Service -->
+                <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 group cursor-pointer" onclick="showSection('dialysis')">
+                    <!-- Medical equipment and dialysis room -->
+                    <div class="h-48 rounded-t-xl overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400'); background-size: cover; background-position: center;"></div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-rose-900 transition-colors" data-bind="services.dialysis">مراكز غسيل الكلي</h4>
+                        <p class="text-gray-600 text-sm mb-4" data-bind="services.dialysis.desc">مراكز متخصصة لعلاج الفشل الكلوي وخدمات غسيل الكلي</p>
+                        <div class="flex items-center text-rose-600 text-sm font-medium">
+                            <span data-bind="services.dialysis.link">تصفح مراكز غسيل الكلي</span>
+                            <i class="fas fa-chevron-right mr-2 group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emergency Services -->
+                <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 group cursor-pointer" onclick="showSection('emergency')">
+                    <!-- Ambulance and emergency response vehicle -->
+                    <div class="h-48 rounded-t-xl overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400'); background-size: cover; background-position: center;"></div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-rose-900 transition-colors" data-bind="services.emergency">خدمات الطوارئ</h4>
+                        <p class="text-gray-600 text-sm mb-4" data-bind="services.emergency.desc">خدمات الإسعاف والطوارئ المتاحة على مدار الساعة</p>
+                        <div class="flex items-center text-rose-600 text-sm font-medium">
+                            <span data-bind="services.emergency.link">تصفح خدمات الطوارئ</span>
+                            <i class="fas fa-chevron-right mr-2 group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- @END_COMPONENT: ServicesGrid -->
+
+        <!-- @COMPONENT: HospitalsSection -->
+        <section id="hospitals" class="section-content" style="display: none;">
+            <h2 class="text-3xl font-bold mb-8 text-gray-900">المستشفيات</h2>
+            
+            <!-- Search and Filter Section -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
+                    <!-- Results Counter -->
+                    <div class="flex items-center text-sm">
+                        <span class="text-gray-700">إجمالي</span>
+                        <span class="text-rose-600 font-bold mx-2 text-lg" data-bind="hospitals.count">15</span>
+                        <span class="text-gray-700">مستشفى</span>
+                    </div>
+                    
+                    <!-- Search and Sort Controls -->
+                    <div class="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
+                        <div class="flex items-center w-full sm:w-auto">
+                            <select class="border border-gray-300 px-4 py-2 rounded-r-md text-sm bg-white text-gray-900 focus:ring-2 focus:ring-rose-500 focus:border-rose-500 w-full sm:w-auto">
+                                <option value="distance">ترتيب حسب المسافة</option>
+                                <option value="name">أ إلى ي</option>
+                                <option value="beds">عدد الأسرة</option>
+                            </select>
+                            <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-l-md text-sm transition-colors whitespace-nowrap">
+                                البحث عن الأقرب
+                            </button>
+                        </div>
+                        
+                        <button class="bg-rose-900 hover:bg-rose-800 text-white px-4 py-2 rounded-md text-sm flex items-center gap-2 transition-colors w-full sm:w-auto justify-center">
+                            <i class="fas fa-map-marker-alt"></i>
+                            تحديد موقعك
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hospitals Grid -->
+            <!-- @MAP: hospitals.map(hospital => ( -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <!-- Hospital Card 1 -->
+                <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group" data-mock="true">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-4 text-gray-900 group-hover:text-rose-900 transition-colors">
+                            مستشفى دمنهور العام
+                        </h3>
+                        
+                        <!-- Address -->
+                        <div class="flex items-start mb-3">
+                            <i class="fas fa-map-marker-alt text-rose-500 mt-0.5 ml-3 flex-shrink-0"></i>
+                            <span class="text-gray-700 text-sm leading-relaxed">
+                                شارع البحر - دمنهور - محافظة البحيرة
+                            </span>
+                        </div>
+                        
+                        <!-- Phone -->
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-phone text-blue-600 ml-3 flex-shrink-0"></i>
+                            <a href="tel:+201234567890" class="text-gray-700 text-sm hover:text-blue-600 transition-colors">
+                                +20 123 456 7890
+                            </a>
+                        </div>
+                        
+                        <!-- Beds -->
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-bed text-amber-600 ml-3 flex-shrink-0"></i>
+                            <span class="text-gray-700 text-sm">250 سرير</span>
+                        </div>
+                        
+                        <!-- Services -->
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-sm text-gray-900 mb-2">الخدمات المقدمة:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-rose-100 text-rose-800 px-2 py-1 rounded-full text-xs font-medium">جراحة عامة</span>
+                                <span class="bg-rose-100 text-rose-800 px-2 py-1 rounded-full text-xs font-medium">طوارئ</span>
+                                <span class="bg-rose-100 text-rose-800 px-2 py-1 rounded-full text-xs font-medium">أطفال</span>
+                                <span class="text-xs text-gray-500">+5 خدمات أخرى</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="flex gap-2">
+                            <button class="flex-1 bg-rose-900 hover:bg-rose-800 text-white text-sm px-3 py-2 rounded-md transition-colors flex items-center justify-center">
+                                عرض التفاصيل
+                                <i class="fas fa-chevron-right mr-1"></i>
+                            </button>
+                            <a href="tel:+201234567890" class="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-md transition-colors flex items-center justify-center">
+                                <i class="fas fa-phone"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hospital Card 2 -->
+                <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group" data-mock="true">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-4 text-gray-900 group-hover:text-rose-900 transition-colors">
+                            مستشفى كفر الدوار المركزي
+                        </h3>
+                        
+                        <div class="flex items-start mb-3">
+                            <i class="fas fa-map-marker-alt text-rose-500 mt-0.5 ml-3 flex-shrink-0"></i>
+                            <span class="text-gray-700 text-sm leading-relaxed">
+                                شارع الجمهورية - كفر الدوار - محافظة البحيرة
+                            </span>
+                        </div>
+                        
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-phone text-blue-600 ml-3 flex-shrink-0"></i>
+                            <a href="tel:+201234567891" class="text-gray-700 text-sm hover:text-blue-600 transition-colors">
+                                +20 123 456 7891
+                            </a>
+                        </div>
+                        
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-bed text-amber-600 ml-3 flex-shrink-0"></i>
+                            <span class="text-gray-700 text-sm">180 سرير</span>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-sm text-gray-900 mb-2">الخدمات المقدمة:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-rose-100 text-rose-800 px-2 py-1 rounded-full text-xs font-medium">نساء وولادة</span>
+                                <span class="bg-rose-100 text-rose-800 px-2 py-1 rounded-full text-xs font-medium">عظام</span>
+                                <span class="bg-rose-100 text-rose-800 px-2 py-1 rounded-full text-xs font-medium">قلب</span>
+                                <span class="text-xs text-gray-500">+3 خدمات أخرى</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-2">
+                            <button class="flex-1 bg-rose-900 hover:bg-rose-800 text-white text-sm px-3 py-2 rounded-md transition-colors flex items-center justify-center">
+                                عرض التفاصيل
+                                <i class="fas fa-chevron-right mr-1"></i>
+                            </button>
+                            <a href="tel:+201234567891" class="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-md transition-colors flex items-center justify-center">
+                                <i class="fas fa-phone"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hospital Card 3 -->
+                <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group" data-mock="true">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-4 text-gray-900 group-hover:text-rose-900 transition-colors">
+                            مستشفى رشيد العام
+                        </h3>
+                        
+                        <div class="flex items-start mb-3">
+                            <i class="fas fa-map-marker-alt text-rose-500 mt-0.5 ml-3 flex-shrink-0"></i>
+                            <span class="text-gray-700 text-sm leading-relaxed">
+                                شارع النيل - رشيد - محافظة البحيرة
+                            </span>
+                        </div>
+                        
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-phone text-blue-600 ml-3 flex-shrink-0"></i>
+                            <a href="tel:+201234567892" class="text-gray-700 text-sm hover:text-blue-600 transition-colors">
+                                +20 123 456 7892
+                            </a>
+                        </div>
+                        
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-bed text-amber-600 ml-3 flex-shrink-0"></i>
+                            <span class="text-gray-700 text-sm">120 سرير</span>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-sm text-gray-900 mb-2">الخدمات المقدمة:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-rose-100 text-rose-800 px-2 py-1 rounded-full text-xs font-medium">جراحة</span>
+                                <span class="bg-rose-100 text-rose-800 px-2 py-1 rounded-full text-xs font-medium">باطنة</span>
+                                <span class="bg-rose-100 text-rose-800 px-2 py-1 rounded-full text-xs font-medium">أشعة</span>
+                                <span class="text-xs text-gray-500">+4 خدمات أخرى</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-2">
+                            <button class="flex-1 bg-rose-900 hover:bg-rose-800 text-white text-sm px-3 py-2 rounded-md transition-colors flex items-center justify-center">
+                                عرض التفاصيل
+                                <i class="fas fa-chevron-right mr-1"></i>
+                            </button>
+                            <a href="tel:+201234567892" class="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-md transition-colors flex items-center justify-center">
+                                <i class="fas fa-phone"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- @END_MAP )) -->
+        </section>
+        <!-- @END_COMPONENT: HospitalsSection -->
+
+        <!-- @COMPONENT: HealthUnitsSection -->
+        <section id="health-units" class="section-content" style="display: none;">
+            <h2 class="text-3xl font-bold mb-8 text-gray-900">الوحدات الصحية</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Health Unit Card -->
+                <div class="bg-white rounded-xl shadow-md p-6" data-mock="true">
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">وحدة صحة دمنهور الريفية</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-map-marker-alt text-rose-500 ml-2"></i>
+                            <span>طريق الإسكندرية - دمنهور</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-phone text-blue-600 ml-2"></i>
+                            <a href="tel:+201111111111" class="hover:text-blue-600">+20 111 111 1111</a>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-clock text-amber-600 ml-2"></i>
+                            <span>8:00 ص - 2:00 م</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">رعاية أولية</span>
+                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full mr-2">تطعيمات</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- @END_COMPONENT: HealthUnitsSection -->
+
+        <!-- @COMPONENT: DialysisCentersSection -->
+        <section id="dialysis" class="section-content" style="display: none;">
+            <h2 class="text-3xl font-bold mb-8 text-gray-900">مراكز غسيل الكلي</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Dialysis Center Card -->
+                <div class="bg-white rounded-xl shadow-md p-6" data-mock="true">
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">مركز غسيل الكلي - دمنهور</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-map-marker-alt text-rose-500 ml-2"></i>
+                            <span>شارع البحر - بجوار مستشفى دمنهور العام</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-phone text-blue-600 ml-2"></i>
+                            <a href="tel:+202222222222" class="hover:text-blue-600">+20 222 222 2222</a>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-procedures text-amber-600 ml-2"></i>
+                            <span>20 جهاز غسيل كلي</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-clock text-green-600 ml-2"></i>
+                            <span>24 ساعة</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- @END_COMPONENT: DialysisCentersSection -->
+
+        <!-- @COMPONENT: EmergencyServicesSection -->
+        <section id="emergency" class="section-content" style="display: none;">
+            <h2 class="text-3xl font-bold mb-8 text-gray-900">خدمات الطوارئ</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Emergency Service Card -->
+                <div class="bg-white rounded-xl shadow-md p-6" data-mock="true">
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">إسعاف دمنهور</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-ambulance text-red-500 ml-2"></i>
+                            <span>5 سيارات إسعاف</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-phone text-blue-600 ml-2"></i>
+                            <a href="tel:123" class="hover:text-blue-600 font-bold">123</a>
+                        </div>
+                        <div class="flex items-center text-sm text-green-600">
+                            <i class="fas fa-clock text-green-600 ml-2"></i>
+                            <span>متاح 24/7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- @END_COMPONENT: EmergencyServicesSection -->
+
+    </main>
+    <!-- @END_COMPONENT: MainContent -->
+
+    <!-- @COMPONENT: Footer -->
+    <footer class="bg-rose-900 text-white mt-16">
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4" data-bind="footer.contact">معلومات التواصل</h3>
+                    <ul class="space-y-2 text-sm text-rose-100">
+                        <li class="flex items-center">
+                            <i class="fas fa-phone ml-2"></i>
+                            <span data-bind="footer.hotline">الخط الساخن: 123</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt ml-2"></i>
+                            <span data-bind="footer.location">محافظة البحيرة، مصر</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4" data-bind="footer.quick_links">روابط سريعة</h3>
+                    <ul class="space-y-2 text-sm text-rose-100">
+                        <li><a href="#hospitals" class="hover:text-white transition-colors" onclick="showSection('hospitals')">المستشفيات</a></li>
+                        <li><a href="#health-units" class="hover:text-white transition-colors" onclick="showSection('health-units')">الوحدات الصحية</a></li>
+                        <li><a href="#dialysis" class="hover:text-white transition-colors" onclick="showSection('dialysis')">مراكز غسيل الكلي</a></li>
+                        <li><a href="#emergency" class="hover:text-white transition-colors" onclick="showSection('emergency')">خدمات الطوارئ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- About -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4" data-bind="footer.about">عن الدليل</h3>
+                    <p class="text-sm text-rose-100 leading-relaxed" data-bind="footer.about.desc">
+                        دليل شامل للمؤسسات الصحية في محافظة البحيرة، يهدف إلى تسهيل الوصول للخدمات الطبية وتوفير المعلومات الضرورية للمرضى وذويهم.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="border-t border-rose-800 mt-8 pt-6 text-center">
+                <p class="text-rose-200 text-sm" data-bind="footer.copyright">
+                    © 2024 دليل المستشفيات - محافظة البحيرة. جميع الحقوق محفوظة.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <script>
+        // @STATE: currentLanguage:string = 'ar'
+        // @STATE: currentSection:string = 'home'
+        
+        (function() {
+            let currentLanguage = 'ar';
+            let currentSection = 'home';
+
+            // Language translations
+            const translations = {
+                ar: {
+                    'site.title': 'دليل المستشفيات',
+                    'site.subtitle': 'محافظة البحيرة',
+                    'hero.title': 'دليل المؤسسات الصحية',
+                    'hero.subtitle': 'محافظة البحيرة',
+                    'hero.description': 'دليلك الشامل للوصول إلى أفضل الخدمات الصحية في محافظة البحيرة. اعثر على المستشفيات، الوحدات الصحية، مراكز غسيل الكلى، وخدمات الطوارئ بسهولة ويسر.',
+                    'emergency.title': 'أرقام الطوارئ',
+                    'emergency.description': 'في حالات الطوارئ، اتصل فوراً على الأرقام التالية',
+                    'emergency.ambulance': 'الإسعاف',
+                    'emergency.fire': 'الدفاع المدني',
+                    'emergency.police': 'شرطة النجدة',
+                    'services.hospitals': 'المستشفيات',
+                    'services.hospitals.desc': 'اعثر على المستشفيات المتخصصة وتفاصيل الخدمات الطبية المتاحة',
+                    'services.hospitals.link': 'تصفح المستشفيات',
+                    'services.health_units': 'الوحدات الصحية',
+                    'services.health_units.desc': 'الوحدات الصحية المحلية للرعاية الأولية والخدمات الوقائية',
+                    'services.health_units.link': 'تصفح الوحدات الصحية',
+                    'services.dialysis': 'مراكز غسيل الكلي',
+                    'services.dialysis.desc': 'مراكز متخصصة لعلاج الفشل الكلوي وخدمات غسيل الكلي',
+                    'services.dialysis.link': 'تصفح مراكز غسيل الكلي',
+                    'services.emergency': 'خدمات الطوارئ',
+                    'services.emergency.desc': 'خدمات الإسعاف والطوارئ المتاحة على مدار الساعة',
+                    'services.emergency.link': 'تصفح خدمات الطوارئ',
+                    'footer.contact': 'معلومات التواصل',
+                    'footer.hotline': 'الخط الساخن: 123',
+                    'footer.location': 'محافظة البحيرة، مصر',
+                    'footer.quick_links': 'روابط سريعة',
+                    'footer.about': 'عن الدليل',
+                    'footer.about.desc': 'دليل شامل للمؤسسات الصحية في محافظة البحيرة، يهدف إلى تسهيل الوصول للخدمات الطبية وتوفير المعلومات الضرورية للمرضى وذويهم.',
+                    'footer.copyright': '© 2024 دليل المستشفيات - محافظة البحيرة. جميع الحقوق محفوظة.'
+                },
+                en: {
+                    'site.title': 'Hospitals Directory',
+                    'site.subtitle': 'Beheira Governorate',
+                    'hero.title': 'Healthcare Institutions Directory',
+                    'hero.subtitle': 'Beheira Governorate',
+                    'hero.description': 'Your comprehensive guide to accessing the best healthcare services in Beheira Governorate. Find hospitals, health units, dialysis centers, and emergency services with ease.',
+                    'emergency.title': 'Emergency Numbers',
+                    'emergency.description': 'In case of emergency, call immediately on the following numbers',
+                    'emergency.ambulance': 'Ambulance',
+                    'emergency.fire': 'Civil Defense',
+                    'emergency.police': 'Police Emergency',
+                    'services.hospitals': 'Hospitals',
+                    'services.hospitals.desc': 'Find specialized hospitals and details of available medical services',
+                    'services.hospitals.link': 'Browse Hospitals',
+                    'services.health_units': 'Health Units',
+                    'services.health_units.desc': 'Local health units for primary care and preventive services',
+                    'services.health_units.link': 'Browse Health Units',
+                    'services.dialysis': 'Dialysis Centers',
+                    'services.dialysis.desc': 'Specialized centers for kidney failure treatment and dialysis services',
+                    'services.dialysis.link': 'Browse Dialysis Centers',
+                    'services.emergency': 'Emergency Services',
+                    'services.emergency.desc': 'Ambulance and emergency services available 24/7',
+                    'services.emergency.link': 'Browse Emergency Services',
+                    'footer.contact': 'Contact Information',
+                    'footer.hotline': 'Hotline: 123',
+                    'footer.location': 'Beheira Governorate, Egypt',
+                    'footer.quick_links': 'Quick Links',
+                    'footer.about': 'About the Directory',
+                    'footer.about.desc': 'A comprehensive directory of healthcare institutions in Beheira Governorate, aimed at facilitating access to medical services and providing necessary information for patients and their families.',
+                    'footer.copyright': '© 2024 Hospitals Directory - Beheira Governorate. All rights reserved.'
+                }
+            };
+
+            // Navigation data
+            const navItems = {
+                ar: {
+                    home: 'الرئيسية',
+                    hospitals: 'المستشفيات',
+                    'health-units': 'الوحدات الصحية',
+                    dialysis: 'مراكز غسيل الكلي',
+                    emergency: 'الطوارئ',
+                    hotlines: 'الخطوط الساخنة',
+                    contact: 'اتصل بنا'
+                },
+                en: {
+                    home: 'Home',
+                    hospitals: 'Hospitals',
+                    'health-units': 'Health Units',
+                    dialysis: 'Dialysis Centers',
+                    emergency: 'Emergency',
+                    hotlines: 'Hotlines',
+                    contact: 'Contact Us'
+                }
+            };
+
+            // Toggle language function
+            window.toggleLanguage = function() {
+                currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar';
+                updateLanguage();
+            };
+
+            // Update language function
+            function updateLanguage() {
+                const html = document.documentElement;
+                const languageToggle = document.getElementById('language-toggle');
+                
+                // Update document attributes
+                html.lang = currentLanguage;
+                html.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+                
+                // Update language toggle button
+                languageToggle.textContent = currentLanguage === 'ar' ? 'EN' : 'عربي';
+                
+                // Update all translatable elements
+                document.querySelectorAll('[data-bind]').forEach(element => {
+                    const key = element.getAttribute('data-bind');
+                    if (translations[currentLanguage][key]) {
+                        element.textContent = translations[currentLanguage][key];
+                    }
+                });
+
+                // Update navigation items
+                document.querySelectorAll('[data-nav]').forEach(element => {
+                    const key = element.getAttribute('data-nav');
+                    if (navItems[currentLanguage][key]) {
+                        element.textContent = navItems[currentLanguage][key];
+                    }
+                });
+            }
+
+            // Show section function
+            window.showSection = function(sectionId) {
+                // Hide all sections
+                document.querySelectorAll('.section-content').forEach(section => {
+                    section.style.display = 'none';
+                });
+
+                // Hide home content if showing a specific section
+                if (sectionId !== 'home') {
+                    document.getElementById('home').style.display = 'none';
+                    document.getElementById(sectionId).style.display = 'block';
+                } else {
+                    document.getElementById('home').style.display = 'block';
+                }
+
+                // Update navigation active state
+                document.querySelectorAll('nav a').forEach(link => {
+                    link.classList.remove('border-b-2', 'border-rose-700', 'pb-1');
+                });
+
+                const activeLink = document.querySelector(`[data-nav="${sectionId}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('border-b-2', 'border-rose-700', 'pb-1');
+                }
+
+                currentSection = sectionId;
+            };
+
+            // Handle navigation clicks
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    if (href.startsWith('#')) {
+                        const sectionId = href.substring(1);
+                        showSection(sectionId);
+                    }
+                });
+            });
+
+            // Initialize the page
+            updateLanguage();
+            showSection('home');
+
+            // TODO: Implement business logic, API calls, and state management for:
+            // - Hospital data fetching and filtering
+            // - Location-based search functionality
+            // - Real-time emergency service availability
+            // - User preferences and favorites
+            // - Offline data caching
+        })();
+    </script>
+</body>
+</html>
